@@ -1,5 +1,6 @@
 #!/bin/sh
 # ^ this just sets the shell we are using i.e bash
+# ultimately, the positional parameters are what are fed in via the CMD in the dockerfile. This impacts on how the litecoind is ran.
 
 # sets the positional parameters eg $1 $0 
 set -e
