@@ -1,0 +1,45 @@
+# Here we are speficying the version of the Kubernetes API we will be using, what kind of configuration this is, and the name of our configuration.
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: litecoin
+
+  # Here we are specifying the spec for the service i.e its name and the amount of repica containers that will run.  
+ spec:
+  serviceName: "litecoin"
+  replicas: 2
+  selector:
+    matchLabels:
+      app: litecoin
+        
+      # Here we are specifying the specs of our 'litecoinserver' container i.e. the image to be used, the ports and the resource limits.   
+     spec:
+      containers:
+      - name: litecoinserver
+        image: somerepo/litecoin:0.17.1
+        ports:
+      - name: portone
+        port: 9332
+      - name: porttwo
+        port: 9333
+      - name: portthree
+        port: 19332
+      - name: portfour
+        port: 19333
+      - name: portfive
+        port: 19444
+      resources:
+        limits:
+         memory: 2Gi 
+        # Below we are specifying the name and the mountpath for our volume. The name of the volume to be created, the perms on it, and the size.  
+        volumeMounts:
+        - name: litecoindata
+          mountPath: /home/litecoin/.litecoin
+  volumeClaimTemplates:
+  - metadata:
+      name: litecoindata
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 5Gi
