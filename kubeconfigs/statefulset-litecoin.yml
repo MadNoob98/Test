@@ -11,7 +11,10 @@ metadata:
   selector:
     matchLabels:
       app: litecoin
-        
+  template:
+    metadata:
+      labels:
+        app: litecoin       
       # Here we are specifying the specs of our 'litecoinserver' container i.e. the image to be used, the ports and the resource limits.   
      spec:
       containers:
