@@ -54,8 +54,8 @@ RUN curl -O https://download.litecoin.org/litecoin-${LITECOIN_VERSION}/linux/lit
 # Here we are simply copying our entrypoint bash/shell script, to /entrypoint.sh inside of the container.
 COPY docker-entrypoint.sh /entrypoint.sh
 
-# Here we are mounting a volume under /home/litecoin/.litecoin (our data directory), however, to not overcomplicated things/we will not need persisten# data for the test, I have left this hashed out. In a production environment/non test environment, we would probably keep this for persistent data.
-#VOLUME ["/home/litecoin/.litecoin"]
+# Here we are feeding the path on which our volume will be. In our case, this is also where the LITECOIN_DATA variable is set above.
+VOLUME ["/home/litecoin/.litecoin"]
 
 # Here we are exposing ports 9332, 9333, 19332, 19333 and 19444, these are not 'dangerous' ports to expose, however, it is quite an amount to expose.
 EXPOSE 9332 9333 19332 19333 19444
