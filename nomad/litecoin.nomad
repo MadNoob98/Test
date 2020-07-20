@@ -10,7 +10,7 @@ job "litecoin" {
       driver = "docker"
 
       config {
-        image = "somerepo/litecoin:0.17.1"
+        image = "somerepo/litecoin-core:0.17.1"
 
         args = [
           "-listen",
@@ -23,11 +23,15 @@ job "litecoin" {
       }
 
       resources {
+        cpu    = 100
+        memory = 2048
+       
         network {
           mbits = 10
           }
         }
-      volumes = [
+     
+       volumes = [
           "name=litecoindata,size=5,repl=1/:/home/litecoind/.litecoin",
         ]
         volume_driver = "pxd"
