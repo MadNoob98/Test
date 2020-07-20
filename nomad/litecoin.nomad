@@ -23,7 +23,7 @@ job "litecoin" {
         cpu    = 100
         memory = 2048
         
-         port "portone" {
+        port "portone" {
          static = "9332"
         }
         port "portwo" {
