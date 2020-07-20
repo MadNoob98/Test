@@ -9,7 +9,7 @@ before_script:
 
 # Here we are setting our version variable.
 env:
-  - VERSION=0.17
+  - VERSION=0.17.1
 # Here we are simply setting our chosen 'langauge', in this case, bash.
 language: bash
 
