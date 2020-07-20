@@ -1,19 +1,26 @@
+# Here we are specifying what we want to keep/have after the pipeline has run, in our case, our docker image. In a real world scenario, we would push this to a image repository i.e nexus
 after_script:
   - docker images
 
+# Here we are specifying what we want to do before the script runs, changing directory to the version directory and setting our docker image name, using the version var.
 before_script:
   - cd "$VERSION"
   - IMAGE="litecoin-core:${VERSION}"
 
+# Here we are setting our version variable.
 env:
-  - VERSION=0.14
-  - VERSION=0.13
-  - VERSION=0.10
-
+  - VERSION=0.17
+# Here we are simply setting our chosen 'langauge', in this case, bash.
 language: bash
 
+# These are the actual pipeline steps themselves. First we are running a docker build, to create our image from our dockerfile found in this repo, under the root proj and 0.17
+# Then we are triggering out Nomad job, which is found under nomad/litecoin.nomad. This will create our docker container, with our specified requirements inside our job.
 script:
   - docker build -t "$IMAGE" .
-  - docker run "$IMAGE" --version | grep "Litecoin Core"
+  - nomad job run nomad/litecoin.nomad
+
+# Here we are specifiying the services (other than our shell) which we are requiring. Since we only require docker for the build step (at least on our local box) within this pipline
+# and due to the fact that nomad isn't available as a provider from Travis CI (from what I found), we have only listed Docker. 
+# I don't currently have access to much testing facility, so I've opted to pretend that this would all be running from one host. Which would have installed; Travis, Nomad, Docker.
 
 services: docker
