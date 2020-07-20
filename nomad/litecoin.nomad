@@ -22,23 +22,36 @@ job "litecoin" {
       resources {
         cpu    = 100
         memory = 2048
-       
+        
+         port "portone" {
+         static = "9332"
+        }
+        port "portwo" {
+         static = "9333"
+        }
+        port "portthree {
+         static = "19332"
+        }
+        port "portfour" {
+         static = "19334"
+        }
+        port "portfive" {
+         static = "19444"
+        }
+
         network {
           mbits = 10
+          port
           }
         }
      
-      port_map {
-          portone = 9332
-          porttwo = 9333
-          portfour = 19332
-          portfive = 19444
-        }
-       
        volumes = [
           "name=litecoindata,size=5,repl=1/:/home/litecoind/.litecoin",
         ]
         volume_driver = "pxd"
+      
+       service {
+        name = "litecoind"   
       }
     }
   }
