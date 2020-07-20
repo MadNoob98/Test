@@ -1,3 +1,14 @@
+# The original Repository for this test was taken from HERE:
+https://github.com/uphold/docker-litecoin-core
+
+# The readme is refrencing to the above.
+
+
+
+
+
+
+
 # uphold/litecoin-core
 
 A Litecoin Core docker image.
