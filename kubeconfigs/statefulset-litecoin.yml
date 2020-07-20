@@ -19,7 +19,7 @@ metadata:
      spec:
       containers:
       - name: litecoinserver
-        image: somerepo/litecoin:0.17.1
+        image: somerepo/litecoin-core:0.17.1
         ports:
       - name: portone
         port: 9332
