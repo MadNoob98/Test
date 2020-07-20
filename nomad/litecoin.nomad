@@ -2,7 +2,7 @@
 # image, the arguments to pass to the container, so listen on the litecoin ports, the network resource limits, the persistent volume and the volume
 # driver. This was my second attempt, as the first nomad job I wrote, wasn't really docker friendly.
 # I recently added a port map and added the print to console argument. 
-# Also, to explain PXD as a driver for the volume, it's simply stands for portworx, which is a persistent storage tool. For this to work, we would need to make sure the volume was already existing.
+# Also, to explain PXD as a driver for the volume, it's simply stands for portworx, which is a persistent storage tool.
 
 job "litecoin" {
   datacenters = ["dc1"]
