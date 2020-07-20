@@ -1,22 +1,24 @@
-# Here we are specifying what we want to keep/have after the pipeline has run, in our case, our docker image. In a real world scenario, we would push this to a image repository i.e nexus
+# Here we are specifying what we want to keep/have after the pipeline has run, in our case, our docker image. 
+# In a real world scenario, we would push this to a image repository i.e nexus (See my fake push step)
 after_script:
   - docker images
 
-# Here we are specifying what we want to do before the script runs, changing directory to the version directory and setting our docker image name, using the version var.
-before_script:
-  - cd "$VERSION"
-  - IMAGE="litecoin-core:${VERSION}"
+# Here we are specifying what we want to do before the script runs, changing directory to the version directory and setting our docker image name. For now, I have hardcoded
+# this, due to time constraints/making things a little cleaner for the test. 
 
-# Here we are setting our version variable.
-env:
-  - VERSION=0.17.1
+before_script:
+  - cd 0.17
+  - IMAGE="litecoin-core:0.17.1"
+
 # Here we are simply setting our chosen 'langauge', in this case, bash.
 language: bash
 
 # These are the actual pipeline steps themselves. First we are running a docker build, to create our image from our dockerfile found in this repo, under the root proj and 0.17
+# I have then created a 'fake push' step, to push our image to our fake somerepo, repo.
 # Then we are triggering out Nomad job, which is found under nomad/litecoin.nomad. This will create our docker container, with our specified requirements inside our job.
 script:
   - docker build -t "$IMAGE" .
+  # I am a fake push to our repo somerepo repo step! (Docker image push)
   - nomad job run nomad/litecoin.nomad
 
 # Here we are specifiying the services (other than our shell) which we are requiring. Since we only require docker for the build step (at least on our local box) within this pipline
