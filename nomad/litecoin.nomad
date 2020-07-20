@@ -13,6 +13,7 @@ job "litecoin" {
         image = "somerepo/litecoin-core:0.17.1"
 
         args = [
+          "-printtoconsole",
           "-listen",
           ":9332",
           ":9333",
